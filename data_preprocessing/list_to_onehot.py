@@ -1,19 +1,16 @@
 import numpy as np
 
-VOCABULARY = np.array(['Hello', 'World', 'Program', 'Game', 'Nural Network','LoL'])
-SIZE_OF_VOCABULARY = len(VOCABULARY)
-input_array = np.array(['Hello', 'World', 'Hello'])
+# VOCABULARY = np.array(['Hello', 'World', 'Program', 'Game', 'Nural Network','LoL'])
+SIZE_OF_VOCABULARY = 5 #len(VOCABULARY)
+input_array = np.array([1,4,0])
 
 
 
 #Creates One Hot array for the value
 def valueToOneHot(value):
     one_hot = np.zeros(SIZE_OF_VOCABULARY)
-    for i in range(0,SIZE_OF_VOCABULARY):
-        if VOCABULARY[i] == value:
-            one_hot[i] = 1
-        else:
-            continue
+    one_hot[value] = 1
+      
     return one_hot
 
 #combines One Hot arrays and makes percentages eg: 0.5 = 50%, 0.6 = 60% 
