@@ -4,13 +4,12 @@
 #convertInputToOneHotPercentages on each element of tuple
 
 import os
-import csv
 import pickle
 from list_to_onehot import *
 from sent_to_tuples import *
 
-file = open(os.path.dirname(__file__)+"/output/colonLess.txt")
-csvreader = csv.reader(file)
+file = open(os.path.dirname(__file__)+"/output/colonLess.txt",'r')
+lines = file.readlines()
 
 with open(os.path.dirname(__file__)+"/output/value_index.pkl", "rb") as value_dict_file:
     # try:
@@ -34,7 +33,7 @@ def str_sent_to_index_sent(line:str):
 X_list =  []
 Y_list = []
 
-for line in csvreader:
+for line in lines:
     index_sent = str_sent_to_index_sent(line)
     tuples_list = sent_to_tuple(index_sent)
     for tuple in tuples_list:
