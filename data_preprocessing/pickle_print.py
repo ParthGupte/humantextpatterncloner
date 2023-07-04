@@ -1,9 +1,12 @@
 import pickle
-with open('value_index.pkl', 'rb') as f:
-    while True:
-        try:
-            line = pickle.load(f)
-            print(line)
-        except EOFError:
-            # Reached end of file
-            break
+import os
+count = 0
+with open(os.path.dirname(__file__)+'/output/value_index.pkl', 'rb') as f:
+    # try:
+    line = pickle.load(f)
+    print(line)
+    count +=1
+    # except EOFError:
+        # Reached end of file
+        # print("nigga nigga nigga")
+        # break

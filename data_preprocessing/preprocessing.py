@@ -3,22 +3,26 @@
 #sent_to_token on each line
 #convertInputToOneHotPercentages on each element of tuple
 
+import os
 import csv
 import pickle
 from list_to_onehot import *
 from sent_to_tuples import *
 
-file = open("output/colonLess.txt")
+file = open(os.path.dirname(__file__)+"/output/colonLess.txt")
 csvreader = csv.reader(file)
 
-index_dict_file = open("output/index_value.pkl")
-value_dict_file = open("output/value_index.pkl")
+with open(os.path.dirname(__file__)+"/output/value_index.pkl", "rb") as value_dict_file:
+    # try:
+    value_index_dict = pickle.load(value_dict_file)
+    print(value_index_dict)
+    # except 
 
-index_value_dict = pickle.load(index_dict_file)
-value_index_dict = pickle.load(value_dict_file)
-
-index_dict_file.close()
-value_dict_file.close()
+with open(os.path.dirname(__file__)+"/output/value_index.pkl", "rb") as index_dict_file:
+    # try:
+    index_value_dict = pickle.load(index_dict_file)
+    print(index_value_dict)
+    # except 
 
 def str_sent_to_index_sent(line:str):
     words_list = line.split()
