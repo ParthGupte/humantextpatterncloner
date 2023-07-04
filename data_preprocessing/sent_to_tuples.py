@@ -1,5 +1,5 @@
 
-def senttotuple(sent:list,wind_size = 3,left_bias = True):
+def sent_to_tuple(sent:list,wind_size = 3,left_bias = True):
     output_list = []
     if wind_size % 2 == 1:
         left = (wind_size - 1)/2
