@@ -6,6 +6,9 @@ import os
 import pickle
 from list_to_onehot import *
 from sent_to_tuples import *
+
+error_words = []
+
 with open(os.path.dirname(__file__)+"/output/colonLess.txt",'r', encoding='utf-8') as file:
     lines = file.readlines()
 
@@ -24,12 +27,17 @@ with open(os.path.dirname(__file__)+"/output/value_index.pkl", "rb") as index_di
 def str_sent_to_index_sent(line:str):
     words_list = line.split()
     index_sent = []
+    
     for word in words_list:
-        index_sent.append(value_index_dict[word])
-
+        try:
+            index_sent.append(value_index_dict[word])
+        except KeyError:
+            error_words.append(word)
+    # for word in words_list:
+    #     index_sent.append(value_index_dict[word])
     return index_sent
 
-X_list =  []
+X_list = []
 Y_list = []
 
 
@@ -39,7 +47,9 @@ for line in lines:
     for tuple in tuples_list:
         X_list.append(convertInputToOneHotPercentages(tuple[0],len(value_index_dict)))
         Y_list.append(convertInputToOneHotPercentages(tuple[1],len(value_index_dict)))
-    
+
+
+print(error_words)
 X_array = np.array(X_list)
 Y_array = np.array(Y_list)
 
