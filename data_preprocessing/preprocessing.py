@@ -2,25 +2,23 @@
 #convert each line to token
 #sent_to_token on each line
 #convertInputToOneHotPercentages on each element of tuple
-
 import os
 import pickle
 from list_to_onehot import *
 from sent_to_tuples import *
-
 with open(os.path.dirname(__file__)+"/output/colonLess.txt",'r', encoding='utf-8') as file:
     lines = file.readlines()
 
 with open(os.path.dirname(__file__)+"/output/value_index.pkl", "rb") as value_dict_file:
     # try:
     value_index_dict = pickle.load(value_dict_file)
-    print(value_index_dict)
+    # print(value_index_dict)
     # except 
 
 with open(os.path.dirname(__file__)+"/output/value_index.pkl", "rb") as index_dict_file:
     # try:
     index_value_dict = pickle.load(index_dict_file)
-    print(index_value_dict)
+    # print(index_value_dict)
     # except 
 
 def str_sent_to_index_sent(line:str):
@@ -28,6 +26,7 @@ def str_sent_to_index_sent(line:str):
     index_sent = []
     for word in words_list:
         index_sent.append(value_index_dict[word])
+
     return index_sent
 
 X_list =  []
@@ -40,7 +39,7 @@ for line in lines:
     for tuple in tuples_list:
         X_list.append(convertInputToOneHotPercentages(tuple[0],len(value_index_dict)))
         Y_list.append(convertInputToOneHotPercentages(tuple[1],len(value_index_dict)))
-
+    
 X_array = np.array(X_list)
 Y_array = np.array(Y_list)
 

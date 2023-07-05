@@ -6,7 +6,7 @@ import numpy as np
 # input_array_value1 = np.array([1,4,0,2])
 
 
-
+coun = 0
 #Creates One Hot array for the value
 def valueToOneHot(value,SIZE_OF_VOCABULARY):
     one_hot = np.zeros(SIZE_OF_VOCABULARY)
@@ -15,14 +15,26 @@ def valueToOneHot(value,SIZE_OF_VOCABULARY):
 
 #combines One Hot arrays and makes percentages eg: 0.5 = 50%, 0.6 = 60% 
 def oneHotCombine(input_array,SIZE_OF_VOCABULARY):
+    # print ('combine one hot')
+    # print(input_array)
     len_of_input_array = len(input_array)
     occurence_of_each_world_array = np.zeros(SIZE_OF_VOCABULARY)
     for i in range(0, len_of_input_array):
         occurence_of_each_world_array = np.add(occurence_of_each_world_array,input_array[i])
-    combinedOneHot = np.where(occurence_of_each_world_array != 0, occurence_of_each_world_array / len_of_input_array, occurence_of_each_world_array)
+        # print(occurence_of_each_world_array)
+        # print("occ of each word array ")
+        # print(len_of_input_array)
+        # print("len of inp array")
+    try:
+        combinedOneHot = np.where(occurence_of_each_world_array != 0, occurence_of_each_world_array / len_of_input_array, occurence_of_each_world_array)
+    except:
+        coun = 0
+    # print('----')
+    # print(combinedOneHot)
     return combinedOneHot
 
 def convertInputToOneHotPercentages(input_array_value,SIZE_OF_VOCABULARY): #MAIN FUNCTION this function
+    # print(input_array_value)
     arr_of_inputs_onehot = np.empty((0, SIZE_OF_VOCABULARY)) #creates an empty array to store all the one hot for inputs
 
     for i in input_array_value:
