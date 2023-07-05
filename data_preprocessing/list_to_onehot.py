@@ -26,11 +26,11 @@ def convertInputToOneHotPercentages(input_array_value,SIZE_OF_VOCABULARY): #MAIN
     arr_of_inputs_onehot = np.empty((0, SIZE_OF_VOCABULARY)) #creates an empty array to store all the one hot for inputs
 
     for i in input_array_value:
-        oneHotConvert = valueToOneHot(i)
+        oneHotConvert = valueToOneHot(i, SIZE_OF_VOCABULARY)
         arr_of_inputs_onehot = np.append(arr_of_inputs_onehot, [oneHotConvert], axis=0)
         #adds all the one hots into the array of inputs
 
-    X = oneHotCombine(arr_of_inputs_onehot)
+    X = oneHotCombine(arr_of_inputs_onehot, SIZE_OF_VOCABULARY)
     return X
 
 #convertInputToOneHotPercentages(input_array_value1) 
