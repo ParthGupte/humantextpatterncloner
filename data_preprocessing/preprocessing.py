@@ -37,21 +37,22 @@ def str_sent_to_index_sent(line:str):
     #     index_sent.append(value_index_dict[word])
     return index_sent
 
-X_list = []
-Y_list = []
-
-
+n = 0
 for line in lines:
     index_sent = str_sent_to_index_sent(line)
     tuples_list = sent_to_tuple(index_sent)
     for tuple in tuples_list:
-        X_list.append(convertInputToOneHotPercentages(tuple[0],len(value_index_dict)))
-        Y_list.append(convertInputToOneHotPercentages(tuple[1],len(value_index_dict)))
-
+        x = convertInputToOneHotPercentages(tuple[0],len(value_index_dict))
+        y = convertInputToOneHotPercentages(tuple[1],len(value_index_dict))
+        np.save("arraydata/x"+str(n),x)
+        np.save("arraydata/y"+str(n),y)
+        del x
+        del y
+        n += 1
 
 print(error_words)
-X_array = np.array(X_list)
-Y_array = np.array(Y_list)
+# X_array = np.array(X_list)
+# Y_array = np.array(Y_list)
 
-np.save("X",X_array)
-np.save("Y",Y_array)
+# np.save("X",X_array)
+# np.save("Y",Y_array)
