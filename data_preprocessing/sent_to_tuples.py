@@ -20,9 +20,11 @@ def sent_to_tuple(sent:list,wind_size = 3,left_bias = True):
         if r_indx > len(sent):
             r_indx = len(sent)
         x = sent[l_indx:i] + sent[i+1:r_indx]
-        y = [i]
+        y = [sent[i]]
         output_list.append((x,y))
 
     return output_list
  
 
+sent = [2,4,1,7,8,97,1,12,2]
+print(sent_to_tuple(sent))
