@@ -14,7 +14,7 @@ def sent_to_tuple(sent:list,wind_size = 3,left_bias = True):
 
     for i in range(len(sent)):
         l_indx = i - left
-        r_indx = i + right
+        r_indx = i + right+1
         if l_indx < 0:
             l_indx = 0
         if r_indx > len(sent):
