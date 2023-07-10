@@ -1,4 +1,5 @@
 import os
+import re
 
 lineCount = 0
 count = 0
@@ -21,7 +22,10 @@ for fileName in listOfFiles:
                 colonIndex = textVal.index(':')
                 textVal = textVal[colonIndex+2:]  #removes name and only text remains
                 if textVal != '<Media omitted>':
-                    fileReadList.append(textVal)
+                    res = re.sub(r'[^\w\s]', '', textVal) 
+                    #regex for removing punctuation 
+                    if res != '':
+                        fileReadList.append(res.lower())
                     
                     lineCount+=1
         except: 
