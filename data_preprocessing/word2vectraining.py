@@ -69,6 +69,9 @@ def update_word2vec(reduced_model, model):
     in_layer,out_layer = model.layers
     in_params = in_layer.get_weights()
     out_params = out_layer.get_weights()
+
+    # print(in_layer)
+    # print(out_layer)
     
     in_lst,out_lst = in_out_tuple
     
@@ -134,12 +137,16 @@ def create_tup_onehots(tuples_batch,batch_model_name):
 
 def train_on_tup_batch(tuples_batch,model):
     batch_model = create_batch_model(tuples_batch,model)
+    # arr1 = batch_model.layers[0].get_weights()[0].copy()
     X, Y = create_tup_onehots(tuples_batch,batch_model.name)
     batch_model.train_on_batch(X,Y)
+    # arr2 = batch_model.layers[0].get_weights()[0].copy()
+    # print((arr1==arr2).all())
     update_word2vec(batch_model,model)
-    
+
 # # create_special_onehot([1,2,4],[1,2,3,4,5])
 # tups_batch = [([1,2],[4]),([2,4],[3]),([1,4],[3])]
+# word2vec_model = word2vec()
 # train_on_tup_batch(tups_batch,word2vec_model)
 # batch_model = create_batch_model(tups_batch,word2vec_model)
 # print(batch_model.name)

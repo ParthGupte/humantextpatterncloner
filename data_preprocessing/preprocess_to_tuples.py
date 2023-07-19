@@ -26,17 +26,19 @@ def str_sent_to_index_sent(line:str):
             error_words.append(word)
     return index_sent
 
-f = open("tupledata.csv",'a')
-csvwriter = csv.writer(f)
-header = ['no','x','y']
-
-n = 0
-for line in lines:
-    index_sent = str_sent_to_index_sent(line)
-    tuples_list = sent_to_tuple(index_sent)
-    rows = []
-    for tup in tuples_list:
-        n += 1
-        rows.append([n,tup[0],tup[1]])
-    csvwriter.writerows(rows)
-f.close()
+with open("tupledata.csv",'w', newline='') as f:
+    csvwriter = csv.writer(f)
+    header = ['no','x','y']
+    csvwriter.writerow(header)
+    n = 0
+    for line in lines:
+        index_sent = str_sent_to_index_sent(line)
+        tuples_list = sent_to_tuple(index_sent)
+        rows = []
+        for tup in tuples_list:
+            if (tup[0] == [] or tup[1] == []):
+                continue
+            else:
+                n += 1
+                rows.append([n,tup[0],tup[1]])
+        csvwriter.writerows(rows)
