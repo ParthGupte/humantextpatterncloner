@@ -14,7 +14,6 @@ with open(os.path.dirname(__file__)+"/output/colonLess.txt",'r', encoding='utf-8
 
 with open(os.path.dirname(__file__)+"/output/value_index.pkl", "rb") as value_dict_file:
     value_index_dict = pickle.load(value_dict_file)
-    print(len(value_index_dict))
 
 with open(os.path.dirname(__file__)+"/output/index_value.pkl", "rb") as index_dict_file:
     index_value_dict = pickle.load(index_dict_file)
@@ -42,7 +41,6 @@ for line in lines:
     tuples_list = sent_to_tuple(index_sent)
         # print("tuples list: ",tuples_list)
     for tuple in tuples_list:
-            
         x = convertInputToOneHotPercentages(tuple[0],len(value_index_dict))
             # print ("X: ",x)
             # print("tuple0 :",tuple[0])

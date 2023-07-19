@@ -11,11 +11,11 @@ import os
 def valueToOneHot(value,SIZE_OF_VOCABULARY):
     one_hot = np.zeros(SIZE_OF_VOCABULARY)
     one_hot[value] = 1
-    print(one_hot)
     return one_hot
 
 #combines One Hot arrays and makes percentages eg: 0.5 = 50%, 0.6 = 60% 
 def oneHotCombine(input_array,SIZE_OF_VOCABULARY):
+    if input_array:
     # print ('combine one hot')
     # print("onehotcombine",len(input_array))
     # len_of_input_array = len(input_array)
@@ -26,27 +26,30 @@ def oneHotCombine(input_array,SIZE_OF_VOCABULARY):
         # print("occ of each word array ")
         # print(len_of_input_array)
         # print("len of inp array")
-    combinedOneHot = np.zeros_like(input_array[0])
-    if len(input_array) > 1:
-        for i in range(len(input_array[0])):
-            if input_array[0][i] != 0:
-                firstVal = i
-                
-        for j in range(len(input_array[1])):
-            if input_array[1][j] != 0:
-                secondVal = j
-        if firstVal == secondVal:
-            combinedOneHot[firstVal] = 1
+        combinedOneHot = np.zeros_like(input_array[0])
+        if len(input_array) > 1:
+            for i in range(len(input_array[0])):
+                if input_array[0][i] != 0:
+                    firstVal = i
+                    
+            for j in range(len(input_array[1])):
+                if input_array[1][j] != 0:
+                    secondVal = j
+            if firstVal == secondVal:
+                combinedOneHot[firstVal] = 1
+            else:
+                combinedOneHot[firstVal] = 0.5
+                combinedOneHot[secondVal] = 0.5
         else:
-            combinedOneHot[firstVal] = 0.5
-            combinedOneHot[secondVal] = 0.5
-    else:
-        combinedOneHot = input_array
+            combinedOneHot = input_array
 
-    # print('----')
-    # print(combinedOneHot)
-    
-    return combinedOneHot
+        # print('----')
+        # print(combinedOneHot)
+        
+        return combinedOneHot
+    else:
+        combinedOneHot = np.zeros(SIZE_OF_VOCABULARY)
+        return combinedOneHot
 
 def convertInputToOneHotPercentages(input_array_value,SIZE_OF_VOCABULARY): #MAIN FUNCTION this function
     # print("hehehaha", input_array_value)
